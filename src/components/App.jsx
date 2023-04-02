@@ -1,11 +1,77 @@
 import React from 'react';
-import { Component } from 'react';
+import { Component, useState, useMemo } from 'react';
 import { nanoid } from 'nanoid';
 import PhoneBookList from './PhoneBookList';
-import Form from './Form';
+import { Form } from './Form/Form';
 import Filter from './Filter';
 
-export class App extends Component {
+export const App = () => {
+  const [phoneList, setPhoneList] = useState([
+    { id: 'id-1', name: 'Tony Stark', number: '459-12-56' },
+    { id: 'id-2', name: 'Stephen Rogers', number: '443-89-12' },
+    { id: 'id-3', name: 'Bruce Banner', number: '645-17-79' },
+    { id: 'id-4', name: 'Thor Odinson', number: '227-84-62' },
+    { id: 'id-5', name: 'Natasha Romanoff', number: '207-91-27' },
+    { id: 'id-6', name: 'Clint Barton', number: '564-92-48' },
+  ]);
+  const [filter, setFilter] = useState('');
+
+  const handleFormSubmit = contact => {
+    console.log(contact);
+
+    // const addItemBook = {
+    //   id: nanoid(),
+    //   // form.name: name,
+    //   // form.number:number,
+    // };
+
+    if (phoneList.find(item => item.name === contact.name)) {
+      return alert(`${contact.name}  is olrady in contacts`);
+    }
+
+    setPhoneList(prevState => [...prevState, contact]);
+
+    // this.setState(prevState => ({
+    //   phoneList: [...prevState.phoneList, addItemBook],
+    // }));
+  };
+
+  const deleteItemBook = phoneId => {
+    setPhoneList(prev => prev.filter(item => item.id !== phoneId));
+
+    // this.setState(prevState => ({
+    //   phoneList: prevState.phoneList.filter(
+    //     phoneListItem => phoneListItem.id !== phoneId
+    //   ),
+    // }));
+  };
+
+  const changeFilter = event => {
+    setFilter(event.currentTarget.value);
+    // console.log(filter);/
+  };
+
+  const filteredContacts = useMemo(() => {
+    const normalizedContacts = filter.toLocaleLowerCase();
+    return phoneList.filter(({ name }) =>
+      name.toLocaleLowerCase().includes(normalizedContacts)
+    );
+  }, [phoneList, filter]);
+
+  return (
+    <>
+      <Form onSubmit={handleFormSubmit} />
+
+      <Filter value={filter} onChange={changeFilter} />
+      <PhoneBookList
+        phoneList={filteredContacts}
+        onDeletePhoneListItem={deleteItemBook}
+      />
+    </>
+  );
+};
+
+export class Apps extends Component {
   state = {
     phoneList: [
       { id: 'id-1', name: 'Tony Stark', number: '459-12-56' },

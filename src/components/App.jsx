@@ -1,6 +1,6 @@
 import React from 'react';
-import { Component, useState, useMemo } from 'react';
-import { nanoid } from 'nanoid';
+import { useState, useMemo } from 'react';
+// import { nanoid } from 'nanoid';
 import PhoneBookList from './PhoneBookList';
 import { Form } from './Form/Form';
 import Filter from './Filter';
@@ -71,94 +71,94 @@ export const App = () => {
   );
 };
 
-export class Apps extends Component {
-  state = {
-    phoneList: [
-      { id: 'id-1', name: 'Tony Stark', number: '459-12-56' },
-      { id: 'id-2', name: 'Stephen Rogers', number: '443-89-12' },
-      { id: 'id-3', name: 'Bruce Banner', number: '645-17-79' },
-      { id: 'id-4', name: 'Thor Odinson', number: '227-84-62' },
-      { id: 'id-5', name: 'Natasha Romanoff', number: '207-91-27' },
-      { id: 'id-6', name: 'Clint Barton', number: '564-92-48' },
-    ],
-    filter: '',
-  };
+// export class Apps extends Component {
+//   state = {
+//     phoneList: [
+//       { id: 'id-1', name: 'Tony Stark', number: '459-12-56' },
+//       { id: 'id-2', name: 'Stephen Rogers', number: '443-89-12' },
+//       { id: 'id-3', name: 'Bruce Banner', number: '645-17-79' },
+//       { id: 'id-4', name: 'Thor Odinson', number: '227-84-62' },
+//       { id: 'id-5', name: 'Natasha Romanoff', number: '207-91-27' },
+//       { id: 'id-6', name: 'Clint Barton', number: '564-92-48' },
+//     ],
+//     filter: '',
+//   };
 
-  handleFormSubmit = ({ name, number }) => {
-    const { phoneList } = this.state;
+//   handleFormSubmit = ({ name, number }) => {
+//     const { phoneList } = this.state;
 
-    console.log(name, number);
+//     console.log(name, number);
 
-    const addItemBook = {
-      id: nanoid(),
-      name: name,
-      number: number,
-    };
+//     const addItemBook = {
+//       id: nanoid(),
+//       name: name,
+//       number: number,
+//     };
 
-    if (phoneList.find(item => item.name === addItemBook.name)) {
-      return alert(`${addItemBook.name}  is olrady in contacts`);
-    }
-    this.setState(prevState => ({
-      phoneList: [...prevState.phoneList, addItemBook],
-    }));
-  };
+//     if (phoneList.find(item => item.name === addItemBook.name)) {
+//       return alert(`${addItemBook.name}  is olrady in contacts`);
+//     }
+//     this.setState(prevState => ({
+//       phoneList: [...prevState.phoneList, addItemBook],
+//     }));
+//   };
 
-  deleteItemBook = phoneId => {
-    this.setState(prevState => ({
-      phoneList: prevState.phoneList.filter(
-        phoneListItem => phoneListItem.id !== phoneId
-      ),
-    }));
-  };
+//   deleteItemBook = phoneId => {
+//     this.setState(prevState => ({
+//       phoneList: prevState.phoneList.filter(
+//         phoneListItem => phoneListItem.id !== phoneId
+//       ),
+//     }));
+//   };
 
-  changeFilter = event => {
-    this.setState({ filter: event.currentTarget.value });
+//   changeFilter = event => {
+//     this.setState({ filter: event.currentTarget.value });
 
-    const { phoneList, filter } = this.state;
+//     const { phoneList, filter } = this.state;
 
-    return phoneList.filter(item =>
-      item.name.toLowerCase().includes(filter.toLowerCase())
-    );
-  };
+//     return phoneList.filter(item =>
+//       item.name.toLowerCase().includes(filter.toLowerCase())
+//     );
+//   };
 
-  getVisibleFilter = () => {
-    const { phoneList, filter } = this.state;
+//   getVisibleFilter = () => {
+//     const { phoneList, filter } = this.state;
 
-    return phoneList.filter(item =>
-      item.name.toLowerCase().includes(filter.toLowerCase())
-    );
-  };
+//     return phoneList.filter(item =>
+//       item.name.toLowerCase().includes(filter.toLowerCase())
+//     );
+//   };
 
-  componentDidMount() {
-    const localPhonelist = localStorage.getItem('phoneList');
-    const parsePhonelist = JSON.parse(localPhonelist);
-    if (parsePhonelist) {
-      this.setState({ phoneList: parsePhonelist });
-    }
-  }
+//   componentDidMount() {
+//     const localPhonelist = localStorage.getItem('phoneList');
+//     const parsePhonelist = JSON.parse(localPhonelist);
+//     if (parsePhonelist) {
+//       this.setState({ phoneList: parsePhonelist });
+//     }
+//   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // console.log(prevState);
-    if (this.state.phoneList !== prevState.phoneList) {
-      localStorage.setItem('phoneList', JSON.stringify(this.state.phoneList));
-    }
-  }
+//   componentDidUpdate(prevProps, prevState) {
+//     // console.log(prevState);
+//     if (this.state.phoneList !== prevState.phoneList) {
+//       localStorage.setItem('phoneList', JSON.stringify(this.state.phoneList));
+//     }
+//   }
 
-  render() {
-    const { filter } = this.state;
+//   render() {
+//     const { filter } = this.state;
 
-    const filteredPhonebookList = this.getVisibleFilter();
+//     const filteredPhonebookList = this.getVisibleFilter();
 
-    return (
-      <>
-        <Form onSubmit={this.handleFormSubmit} />
+//     return (
+//       <>
+//         <Form onSubmit={this.handleFormSubmit} />
 
-        <Filter value={filter} onChange={this.changeFilter} />
-        <PhoneBookList
-          phoneList={filteredPhonebookList}
-          onDeletePhoneListItem={this.deleteItemBook}
-        />
-      </>
-    );
-  }
-}
+//         <Filter value={filter} onChange={this.changeFilter} />
+//         <PhoneBookList
+//           phoneList={filteredPhonebookList}
+//           onDeletePhoneListItem={this.deleteItemBook}
+//         />
+//       </>
+//     );
+//   }
+// }

@@ -21,7 +21,7 @@ export const Form = ({ onSubmit }) => {
   const handleSubmit = event => {
     event.preventDefault();
 
-    const profile = (form.id = nanoid(3));
+    form.id = nanoid(3);
 
     onSubmit(form);
     // console.log(form);

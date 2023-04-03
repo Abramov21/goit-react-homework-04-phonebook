@@ -21,10 +21,11 @@ export const Form = ({ onSubmit }) => {
   const handleSubmit = event => {
     event.preventDefault();
 
-    form.id = nanoid(3);
+    // form.id = nanoid(3);
+    const newForm = { ...form, id: nanoid(5) };
 
-    onSubmit(form);
-    // console.log(form);
+    onSubmit(newForm);
+    // console.log(newForm);
     resetForm();
   };
 

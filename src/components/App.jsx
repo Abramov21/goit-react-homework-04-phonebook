@@ -29,7 +29,12 @@ export const App = () => {
     //   // form.number:number,
     // };
 
-    if (phoneList.find(item => item.name === contact.name)) {
+    if (
+      phoneList.find(
+        item =>
+          item.name.toLocaleLowerCase() === contact.name.toLocaleLowerCase()
+      )
+    ) {
       return alert(`${contact.name}  is olrady in contacts`);
     }
 
